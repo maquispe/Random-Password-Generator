@@ -1,0 +1,22 @@
+.form {
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 1rem;
+  column-gap: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.pass-display {
+  background-color: white;
+  color: black;
+  padding: 0.5rem;
+  height: 3.5rem;
+  width: 650px;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 25px;
+}

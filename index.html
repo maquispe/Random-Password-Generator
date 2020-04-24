@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Passwork Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/what-the-hex.png);">
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">Random Password Generator</span>
+      </nav>
+      <div class="jumbotron d-flex flex-column align-items-center">
+        <h1 class="display-4">Generate a random password!</h1>
+        <textarea class="pass-display passDisplay" placeholder="Your Password Here"></textarea>
+        <hr class="my-4">
+        
+        <form class="form passwordGeneratorForm">
+        <label for="characterAmountNumber">Number of Characters</label>
+        <div>
+            <input type="range" min="8" max="128" value="8" class="characterAmountRange"></input>
+            <input type="number" min="8" max="128" value="8" class="characterAmountNumber"></input>
+        </div>
+        
+        <label for="includeUppercase">Include Uppercase</label>
+        <input type="checkbox" class="includeUppercase">
+
+        <label for="includeNumbers">Include Numbers</label>
+        <input type="checkbox" class="includeNumbers">
+
+        <label for="includeSymbols">Include Symbols</label>
+        <input type="checkbox" class="includeSymbols">
+        
+        <input class="btn btn-primary" type="submit" value="Generate Password">
+        <input class="btn btn-primary" onclick= "copyClip()" type="button" value="Copy to Clipboard">
+        </form>
+      </div>
+    
+    
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>      
+    <script src="script.js" defer></script>
+</body>
+</html>

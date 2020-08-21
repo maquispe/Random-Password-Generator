@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Passwork Generator</title>
+    <title>Random Password Generator</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,7 +23,9 @@
             <input type="range" min="8" max="128" value="8" class="characterAmountRange"></input>
             <input type="number" min="8" max="128" value="8" class="characterAmountNumber"></input>
         </div>
-        
+        <label for="includeLowercase">Include Lowercase</label>
+        <input type="checkbox" class="includeLowercase">
+
         <label for="includeUppercase">Include Uppercase</label>
         <input type="checkbox" class="includeUppercase">
 
@@ -33,7 +35,7 @@
         <label for="includeSymbols">Include Symbols</label>
         <input type="checkbox" class="includeSymbols">
         
-        <input class="btn btn-primary" type="submit" value="Generate Password">
+        <input class="btn btn-primary generate" type="submit" value="Generate Password">
         <input class="btn btn-primary" onclick= "copyClip()" type="button" value="Copy to Clipboard">
         </form>
       </div>

@@ -1,80 +1,115 @@
-var characterAmountRange = document.querySelector(".characterAmountRange");
-var characterAmountNumber = document.querySelector(".characterAmountNumber");
-var includeUppercaseElement = document.querySelector(".includeUppercase");
-var includeNumbersElement = document.querySelector(".includeNumbers");
-var includeSymbolsElement = document.querySelector(".includeSymbols");
-var passDisplay = document.querySelector(".passDisplay");
-var form = document.querySelector(".passwordGeneratorForm");
+const characterAmountRange = document.querySelector(".characterAmountRange");
+const characterAmountNumber = document.querySelector(".characterAmountNumber");
+const includeLowercaseElement = document.querySelector(".includeLowercase");
+const includeUppercaseElement = document.querySelector(".includeUppercase");
+const includeNumbersElement = document.querySelector(".includeNumbers");
+const includeSymbolsElement = document.querySelector(".includeSymbols");
+const generateBtn = document.querySelector(".generate");
+const passDisplay = document.querySelector(".passDisplay");
+const form = document.querySelector(".passwordGeneratorForm");
 
-///Makes arrays out of ASCII character codes for lowercase letters, uppercase letters, numbers, and special symbols.
-var lowercaseCharCodes = arrayFromLowToHigh(97, 122);
-var uppercaseCharCodes = arrayFromLowToHigh(65, 90);
-var numberCharCodes = arrayFromLowToHigh(48, 57);
-var symbolCharCodes = arrayFromLowToHigh(33, 47)
-  .concat(arrayFromLowToHigh(58, 64))
-  .concat(arrayFromLowToHigh(91, 96))
-  .concat(arrayFromLowToHigh(123, 126));
+//Adds password generating event to password generating button, as well as giving the user options to include other characters other than the lowercase letters.
+window.onload = () => {
+  generateBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const characterAmount = characterAmountNumber.value;
+    const includeLowercase = includeLowercaseElement.checked;
+    const includeUppercase = includeUppercaseElement.checked;
+    const includeNumbers = includeNumbersElement.checked;
+    const includeSymbols = includeSymbolsElement.checked;
+    const password = generatePassword(
+      characterAmount,
+      includeLowercase,
+      includeUppercase,
+      includeNumbers,
+      includeSymbols
+    );
+    passDisplay.value = password;
+  });
 
-///Adds password generating event to password generating button, as well as giving the user options to include other characters other than the lowercase letters.
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  var characterAmount = characterAmountNumber.value;
-  var includeUppercase = includeUppercaseElement.checked;
-  var includeNumbers = includeNumbersElement.checked;
-  var includeSymbols = includeSymbolsElement.checked;
-  var password = generatePassword(
+  ///Randomizes selected characters.
+  function generatePassword(
     characterAmount,
+    includeLowercase,
     includeUppercase,
     includeNumbers,
     includeSymbols
-  );
-  passDisplay.value = password;
-});
+  ) {
+    let charHolder = [];
+    let passwordCharacters = []; //str
+    const lowercaseCharCodes = arrayFromLowToHigh(97, 122); //lowercase ASCII codes
+    const uppercaseCharCodes = arrayFromLowToHigh(65, 90); //uppercase ASCII codes
+    const numberCharCodes = arrayFromLowToHigh(48, 57); // number ASCII codes
+    const symbolCharCodes = arrayFromLowToHigh(33, 47) //special character ASCII codes
+      .concat(arrayFromLowToHigh(58, 64))
+      .concat(arrayFromLowToHigh(91, 96))
+      .concat(arrayFromLowToHigh(123, 126));
 
-///Randomizes selected characters, with the lowercase letters set as a default to be included at all times.
-function generatePassword(
-  characterAmount,
-  includeUppercase,
-  includeNumbers,
-  includeSymbols
-) {
-  var charCodes = lowercaseCharCodes;
-  if (includeUppercase) charCodes = charCodes.concat(uppercaseCharCodes);
-  if (includeNumbers) charCodes = charCodes.concat(numberCharCodes);
-  if (includeSymbols) charCodes = charCodes.concat(symbolCharCodes);
+    if (includeLowercase) {
+      charHolder = charHolder.concat(lowercaseCharCodes);
+      let randomLower = Math.floor(Math.random() * lowercaseCharCodes.length);
+      passwordCharacters.push(lowercaseCharCodes[randomLower]);
+    }
 
-  var passwordCharacters = [];
-  for (var i = 0; i < characterAmount; i++) {
-    var characterCode = charCodes[Math.floor(Math.random() * charCodes.length)];
-    passwordCharacters.push(String.fromCharCode(characterCode));
+    if (includeUppercase) {
+      charHolder = charHolder.concat(uppercaseCharCodes);
+      let randomUpper = Math.floor(Math.random() * uppercaseCharCodes.length);
+      passwordCharacters.push(uppercaseCharCodes[randomUpper]);
+    }
+
+    if (includeNumbers) {
+      charHolder = charHolder.concat(numberCharCodes);
+      let randomNumber = Math.floor(Math.random() * numberCharCodes.length);
+      passwordCharacters.push(numberCharCodes[randomNumber]);
+    }
+
+    if (includeSymbols) {
+      charHolder = charHolder.concat(symbolCharCodes);
+      let randomSymbol = Math.floor(Math.random() * symbolCharCodes.length);
+      passwordCharacters.push(symbolCharCodes[randomSymbol]);
+    }
+    console.log("charHolder", charHolder);
+    console.log("passwordCharacters", passwordCharacters);
+
+    let counter = characterAmount - passwordCharacters.length;
+    for (let i = 0; i < counter; i++) {
+      let randomCharacter = Math.floor(Math.random() * charHolder.length);
+      passwordCharacters.push(charHolder[randomCharacter]);
+
+      console.log("password characters", passwordCharacters);
+      console.log("random Character index", randomCharacter);
+    }
+    console.log(
+      "password",
+      String.fromCharCode.apply(String, passwordCharacters)
+    );
+    return String.fromCharCode.apply(String, passwordCharacters);
   }
-  return passwordCharacters.join("");
-}
 
-///Allows arrays to be created in numerical order for ASCII codes.
-function arrayFromLowToHigh(low, high) {
-  var array = [];
-  for (var i = low; i <= high; i++) {
-    array.push(i);
-  }
-  return array;
-}
+  ///Allows arrays to be created in numerical order for ASCII codes.
+  const arrayFromLowToHigh = (low, high) => {
+    const array = [];
+    for (let i = low; i <= high; i++) {
+      array.push(i);
+    }
+    return array;
+  };
 
-///Syncs range bar and number input to set amount of characters in password.
-characterAmountNumber.addEventListener("input", syncCharacterAmount);
-characterAmountRange.addEventListener("input", syncCharacterAmount);
+  ///Syncs range bar and number input to set amount of characters in password.
+  const syncCharacterAmount = (e) => {
+    const value = e.target.value;
+    characterAmountNumber.value = value;
+    characterAmountRange.value = value;
+  };
 
-function syncCharacterAmount(e) {
-  var value = e.target.value;
-  characterAmountNumber.value = value;
-  characterAmountRange.value = value;
-}
+  characterAmountNumber.addEventListener("input", syncCharacterAmount);
+  characterAmountRange.addEventListener("input", syncCharacterAmount);
 
-///Copies generated password to computer clipboard.
-function copyClip() {
+  ///Copies generated password to computer clipboard.
+};
+
+const copyClip = () => {
   document.querySelector(".pass-display").select();
 
   document.execCommand("Copy");
-}
-
-console.log(symbolCharCodes);
+};

@@ -11,32 +11,34 @@
 <body style="background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/what-the-hex.png);">
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">Random Password Generator</span>
-      </nav>
+    </nav>
       <div class="jumbotron d-flex flex-column align-items-center">
         <h1 class="display-4">Generate a random password!</h1>
         <textarea class="pass-display passDisplay" placeholder="Your Password Here"></textarea>
         <hr class="my-4">
         
         <form class="form passwordGeneratorForm">
-        <label for="characterAmountNumber">Number of Characters</label>
-        <div>
+          <label for="characterAmountNumber">Number of Characters</label>
+          <div>
             <input type="range" min="8" max="128" value="8" class="characterAmountRange"></input>
+            </hr> 
+            </hr>
             <input type="number" min="8" max="128" value="8" class="characterAmountNumber"></input>
-        </div>
-        <label for="includeLowercase">Include Lowercase</label>
-        <input type="checkbox" class="includeLowercase">
+          </div>
+          <label for="includeLowercase">Include Lowercase</label>
+          <input type="checkbox" class="includeLowercase">
 
-        <label for="includeUppercase">Include Uppercase</label>
-        <input type="checkbox" class="includeUppercase">
+          <label for="includeUppercase">Include Uppercase</label>
+          <input type="checkbox" class="includeUppercase">
 
-        <label for="includeNumbers">Include Numbers</label>
-        <input type="checkbox" class="includeNumbers">
+          <label for="includeNumbers">Include Numbers</label>
+          <input type="checkbox" class="includeNumbers">
 
-        <label for="includeSymbols">Include Symbols</label>
-        <input type="checkbox" class="includeSymbols">
+          <label for="includeSymbols">Include Symbols</label>
+          <input type="checkbox" class="includeSymbols">
         
-        <input class="btn btn-primary generate" type="submit" value="Generate Password">
-        <input class="btn btn-primary" onclick= "copyClip()" type="button" value="Copy to Clipboard">
+          <input class="btn btn-primary generate" type="submit" value="Generate Password">
+          <input class="btn btn-primary" onclick= "copyClip()" type="button" value="Copy to Clipboard">
         </form>
       </div>
     

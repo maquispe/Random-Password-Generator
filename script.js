@@ -27,14 +27,14 @@ window.onload = () => {
     passDisplay.value = password;
   });
 
-  ///Randomizes selected characters.
-  function generatePassword(
+  // Randomizes selected characters.
+  const generatePassword = (
     characterAmount,
     includeLowercase,
     includeUppercase,
     includeNumbers,
     includeSymbols
-  ) {
+  ) => {
     let charHolder = [];
     let passwordCharacters = []; //str
     const lowercaseCharCodes = arrayFromLowToHigh(97, 122); //lowercase ASCII codes
@@ -84,9 +84,9 @@ window.onload = () => {
       String.fromCharCode.apply(String, passwordCharacters)
     );
     return String.fromCharCode.apply(String, passwordCharacters);
-  }
+  };
 
-  ///Allows arrays to be created in numerical order for ASCII codes.
+  // Allows arrays to be created in numerical order for ASCII codes.
   const arrayFromLowToHigh = (low, high) => {
     const array = [];
     for (let i = low; i <= high; i++) {
@@ -95,7 +95,7 @@ window.onload = () => {
     return array;
   };
 
-  ///Syncs range bar and number input to set amount of characters in password.
+  // Syncs range bar and number input to set amount of characters in password.
   const syncCharacterAmount = (e) => {
     const value = e.target.value;
     characterAmountNumber.value = value;
@@ -105,7 +105,7 @@ window.onload = () => {
   characterAmountNumber.addEventListener("input", syncCharacterAmount);
   characterAmountRange.addEventListener("input", syncCharacterAmount);
 
-  ///Copies generated password to computer clipboard.
+  // Copies generated password to computer clipboard.
 };
 
 const copyClip = () => {
